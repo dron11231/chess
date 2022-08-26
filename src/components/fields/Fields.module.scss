@@ -1,0 +1,27 @@
+.field-black {
+  background-color: black;
+
+  span {
+    color: white;
+  }
+}
+
+.field-white {
+  background-color: white;
+}
+
+.field {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  span {
+    position: absolute;
+    opacity: 0.2;
+    font-weight: bold;
+    font-size: 24px;
+  }
+}
