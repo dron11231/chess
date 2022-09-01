@@ -5,7 +5,7 @@ import { IField } from "../../types/ChessTypes";
 
 const Main: React.FC = () => {
   const [fields, setFields] = useState<IField[]>([]);
-  const [fieldElems, setFieldElems] = useState<any>([]);
+  const [fieldElems, setFieldElems] = useState<ReactElement[]>([]);
   const nums = [8, 7, 6, 5, 4, 3, 2, 1];
   const letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
@@ -59,7 +59,7 @@ const Main: React.FC = () => {
   useEffect(() => {
     setFieldElems(() => {
       const newArr = fields.map((el) => {
-        return el.element;
+        return el.element!;
       });
       return newArr;
     });
