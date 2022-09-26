@@ -16,6 +16,7 @@ const reducer = function (
 ): Istate {
   switch (action.type) {
     case "SELECT_FIGURE":
+      if (action.color !== state.move) return state;
       return {
         ...state,
         figure: {

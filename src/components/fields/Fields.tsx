@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./Fields.module.scss";
 import { IField } from "../../types/ChessTypes";
 import { WrappedPawn } from "../figures/Figures";
