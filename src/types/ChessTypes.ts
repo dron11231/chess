@@ -8,10 +8,11 @@ export interface IField {
 
 export interface IFigure {
   color: string;
-  firstMove: boolean;
   position: string;
-  figure: string;
-  startPosition: string;
-  isEatingMove: boolean;
-  selected: boolean;
+  figureName: string;
+}
+
+export interface Istate {
+  figure: IFigure;
+  move: string;
 }

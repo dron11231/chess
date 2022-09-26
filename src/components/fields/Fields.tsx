@@ -1,60 +1,24 @@
 import React, { useState } from "react";
 import classes from "./Fields.module.scss";
-import { IField, IFigure } from "../../types/ChessTypes";
-import { Pawn } from "../figures/Figures";
+import { IField } from "../../types/ChessTypes";
+import { WrappedPawn } from "../figures/Figures";
 
 interface Props {
   fieldInfo: IField;
 }
 
-const FieldBlack: React.FC<Props> = ({ fieldInfo }) => {
-  const [figureOptions, setFigureOptions] = useState<IFigure>({
-    color: "",
-    figure: "",
-    firstMove: false,
-    position: "",
-    startPosition: "",
-    isEatingMove: false,
-    selected: false,
-  });
+const Field: React.FC<Props> = ({ fieldInfo }) => {
   const numPosition = Number(fieldInfo.position.split("")[1]);
+  const color = fieldInfo.color === "white" ? "field-white" : "field-black";
 
   return (
-    <div className={`${classes["field-black"]} ${classes.field}`}>
+    <div className={`${classes[color]} ${classes.field}`}>
       <span>{fieldInfo.position}</span>
       {numPosition === 2 || numPosition === 7 ? (
-        <Pawn
-          figureOptions={figureOptions}
-          setFigureOptions={setFigureOptions}
-        />
+        <WrappedPawn fieldInfo={fieldInfo} fieldNumber={numPosition} />
       ) : null}
     </div>
   );
 };
 
-const FieldWhite: React.FC<Props> = ({ fieldInfo }) => {
-  const numPosition = Number(fieldInfo.position.split("")[1]);
-  const [figureOptions, setFigureOptions] = useState<IFigure>({
-    color: "",
-    figure: "",
-    firstMove: false,
-    position: "",
-    startPosition: "",
-    isEatingMove: false,
-    selected: false,
-  });
-
-  return (
-    <div className={`${classes["field-white"]} ${classes.field}`}>
-      <span>{fieldInfo.position}</span>
-      {numPosition === 2 || numPosition === 7 ? (
-        <Pawn
-          figureOptions={figureOptions}
-          setFigureOptions={setFigureOptions}
-        />
-      ) : null}
-    </div>
-  );
-};
-
-export { FieldBlack, FieldWhite };
+export { Field };

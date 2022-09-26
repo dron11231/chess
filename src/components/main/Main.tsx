@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import classes from "./Main.module.scss";
-import { FieldBlack, FieldWhite } from "../fields/Fields";
+import { Field } from "../fields/Fields";
 import { IField } from "../../types/ChessTypes";
 
 const Main: React.FC = () => {
@@ -23,29 +23,25 @@ const Main: React.FC = () => {
 
         if (idx === 1) {
           acc.color = "white";
-          acc.element = <FieldWhite fieldInfo={acc} key={acc.position} />;
+          acc.element = <Field fieldInfo={acc} key={acc.position} />;
         }
         if (acc.color === "white") {
           value.color = "black";
-          value.element = <FieldBlack fieldInfo={value} key={value.position} />;
+          value.element = <Field fieldInfo={value} key={value.position} />;
         } else {
           value.color = "white";
-          value.element = <FieldWhite fieldInfo={value} key={value.position} />;
+          value.element = <Field fieldInfo={value} key={value.position} />;
         }
 
         if (counter === 8) {
           counter = 0;
           if (acc.color === "black") {
             value.color = "black";
-            value.element = (
-              <FieldBlack fieldInfo={value} key={value.position} />
-            );
+            value.element = <Field fieldInfo={value} key={value.position} />;
           }
           if (acc.color === "white") {
             value.color = "white";
-            value.element = (
-              <FieldWhite fieldInfo={value} key={value.position} />
-            );
+            value.element = <Field fieldInfo={value} key={value.position} />;
           }
         }
 
