@@ -11,21 +11,26 @@ import { Iaction } from "../../types/ActionTypes";
 interface Props {
   fieldInfo: IField;
   fieldNumber: number;
-  figure?: IFigure;
+  whiteFigures?: IFigure;
+  blackFigures?: IFigure;
   selectFigure: (figure: string, position: string, color: string) => Iaction;
+  move?: string;
 }
 
 const Pawn: React.FC<Props> = ({
   fieldInfo,
   fieldNumber,
-  figure,
+  whiteFigures,
+  blackFigures,
   selectFigure,
+  move,
 }) => {
   const figureColor = fieldNumber === 2 ? "white" : "black";
+  const moveFigures = move === "white" ? whiteFigures : blackFigures;
   return (
     <div
       className={
-        figure?.position === fieldInfo.position
+        moveFigures?.position === fieldInfo.position
           ? `${classes.pawn} ${classes.selected}`
           : classes.pawn
       }

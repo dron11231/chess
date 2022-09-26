@@ -2,6 +2,8 @@ import React, { ReactElement, useEffect, useState } from "react";
 import classes from "./Main.module.scss";
 import { Field } from "../fields/Fields";
 import { IField } from "../../types/ChessTypes";
+import { connect } from "react-redux";
+import * as actions from "../../actions";
 
 const Main: React.FC = () => {
   const [fields, setFields] = useState<IField[]>([]);
@@ -64,4 +66,10 @@ const Main: React.FC = () => {
   return <div className={classes["game-board"]}>{fieldElems}</div>;
 };
 
-export default Main;
+const mapStateToProps = (state: { fields: Array<IField> }) => {
+  return {
+    fields: [...state.fields],
+  };
+};
+
+export default connect(mapStateToProps, actions)(Main);

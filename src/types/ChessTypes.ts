@@ -7,12 +7,13 @@ export interface IField {
 }
 
 export interface IFigure {
-  color: string;
   position: string;
   figureName: string;
 }
 
 export interface Istate {
-  figure: IFigure;
+  whiteFigures: IFigure;
+  blackFigures: IFigure;
   move: string;
+  fields: Array<IField>;
 }
