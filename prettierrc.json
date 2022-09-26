@@ -4,5 +4,5 @@
   "endOfLine": "auto",
   "printWidth": 120,
   "semi": true,
-  "parser":"babel"
+  "parser": "babel"
 }

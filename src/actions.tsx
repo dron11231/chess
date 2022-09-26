@@ -1,7 +1,7 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Iaction } from "./types/ActionTypes";
-import { Field } from "./components/fields/Fields";
-import { IField } from "./types/ChessTypes";
+import Field from "./components/fields/Fields";
+import { IField, IFigure } from "./types/ChessTypes";
 
 export const selectFigure = (
   figure: string,
@@ -16,13 +16,29 @@ export const selectFigure = (
   };
 };
 
+export const setStartPosition = (
+  figureElement: ReactElement,
+  figureOptions: IFigure
+): Iaction => {
+  return {
+    type: "SET_START_POSITION",
+    figureElement: figureElement,
+    figureOptions: figureOptions,
+  };
+};
+
 export const generateBoard = (): Iaction => {
   const nums = [8, 7, 6, 5, 4, 3, 2, 1];
   const letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
   const newArr: IField[] = [];
   nums.forEach((el: number) => {
     for (let i = 0; i < 8; i++) {
-      newArr.push({ position: letters[i] + el, color: "" });
+      newArr.push({
+        position: letters[i] + el,
+        color: "",
+        figureElement: <></>,
+        figureOptions: { color: "", position: "", figureName: "" },
+      });
     }
   });
   let counter = 0;
@@ -57,7 +73,3 @@ export const generateBoard = (): Iaction => {
   });
   return { type: "GENERATE_BOARD", fields: newArr };
 };
-
-/* export const getStartPosition = (position: string) => {
-  
-} */
