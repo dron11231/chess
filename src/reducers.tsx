@@ -86,11 +86,12 @@ const reducer = function (
                     const diff = +toNumber - +fromNumber;
                     const allowMove = moveHandler(
                       //Функция проверяющая можно ли делать ход
-                      diff,
-                      [fromLetter, toLetter],
-                      el.figureOptions.firstMove
+                      el.figureOptions,
+                      targetField,
+                      fields
                     );
                     if (allowMove) {
+                      // Если ход разрешен перемещаем фигуру и её настройки на целевое поле, на старом поле фигуру удаляем
                       targetField.figureElement = (
                         <WrappedPawn
                           figureColor={el.figureOptions.color}
@@ -113,7 +114,7 @@ const reducer = function (
                         color: "",
                         position: "",
                       };
-                      move = move === "white" ? "black" : "white";
+                      move = move === "white" ? "black" : "white"; //После хода одной из фигур передаем право хода другому цвету
                     }
                   }
                 }
