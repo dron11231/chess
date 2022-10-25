@@ -17,8 +17,7 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-console.log(store.getState());
-console.log(store.subscribe(() => console.log(store.getState())));
+store.subscribe(() => console.log(store.getState()));
 
 root.render(
   <React.StrictMode>

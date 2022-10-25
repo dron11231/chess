@@ -12,11 +12,11 @@ export interface IFigure {
   position: string;
   figureName: string;
   color: string;
+  firstMove?: boolean;
 }
 
 export interface Istate {
-  whiteFigures: IFigure;
-  blackFigures: IFigure;
+  selectedFigure: IFigure;
   move: string;
   fields: Array<IField>;
 }

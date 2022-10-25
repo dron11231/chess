@@ -16,14 +16,17 @@ export const selectFigure = (
   };
 };
 
-export const setStartPosition = (
-  figureElement: ReactElement,
-  figureOptions: IFigure
-): Iaction => {
+export const setStartPosition = (figureName: string): Iaction => {
   return {
     type: "SET_START_POSITION",
-    figureElement: figureElement,
-    figureOptions: figureOptions,
+    figureName: figureName,
+  };
+};
+
+export const moveFigure = (position: string): Iaction => {
+  return {
+    type: "MOVE_FIGURE",
+    position,
   };
 };
 

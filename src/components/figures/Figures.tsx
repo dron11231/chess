@@ -10,23 +10,22 @@ import { Iaction } from "../../types/ActionTypes";
 
 interface Props {
   fieldInfo: IField;
-  fieldNumber: number;
-  whiteFigures?: IFigure;
-  blackFigures?: IFigure;
+
+  selectedFigure?: IFigure;
   selectFigure: (figure: string, position: string, color: string) => Iaction;
   move?: string;
+  fields?: Array<IField>;
+  figureColor: string;
 }
 
 const Pawn: React.FC<Props> = ({
   fieldInfo,
-  fieldNumber,
-  whiteFigures,
-  blackFigures,
+  selectedFigure,
   selectFigure,
   move,
+  figureColor,
 }) => {
-  const figureColor = fieldNumber === 2 ? "white" : "black";
-  const moveFigures = move === "white" ? whiteFigures : blackFigures;
+  const moveFigures = move === figureColor ? selectedFigure : null; //Проверяет чей ход
   return (
     <div
       className={
@@ -34,7 +33,11 @@ const Pawn: React.FC<Props> = ({
           ? `${classes.pawn} ${classes.selected}`
           : classes.pawn
       }
-      onClick={() => {
+      onClick={(e) => {
+        if (move === figureColor) {
+          e.stopPropagation();
+        }
+        console.log("select");
         selectFigure("pawn", fieldInfo.position, figureColor);
       }}
     >
