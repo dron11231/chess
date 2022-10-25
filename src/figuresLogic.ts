@@ -20,7 +20,7 @@ export function moveHandler(
   let result;
   const [fromLetter, fromNumber] = figureOptions.position.split("");
   const [toLetter, toNumber] = targetField.position.split(""); // Деструктурируем букву и цифру позиции
-  const diff = +toNumber - +fromNumber; // diff - разница в клетках между позицией фигуры и целевой позицей куда будет сделан ходs
+  const diff = +toNumber - +fromNumber; // diff - разница в клетках между позицией фигуры и целевой позицей куда будет сделан ход
 
   //Проверяем по одной ли линии будет сделан ход
   if (fromLetter === toLetter) {
@@ -30,7 +30,7 @@ export function moveHandler(
       figureOptions.position,
       targetField.position,
     ];
-    fieldsCopy.sort(sortArray); //Сортируем массив по алфавиту и цифрам
+    fieldsCopy.sort(sortArray); //Сортируем скопированный массив клеток по алфавиту и цифрам для нахождения 'пути' фигуры
     let idxA = fieldsCopy.findIndex((el) => el.position === positionA);
     let idxB = fieldsCopy.findIndex((el) => el.position === positionB);
     if (idxA > idxB) {
@@ -39,7 +39,7 @@ export function moveHandler(
       idxA++;
       idxB++;
     }
-    const figurePath = fieldsCopy.slice(idxA, idxB); //Находим путь из клеток который прошла фигура
+    const figurePath = fieldsCopy.slice(idxA, idxB); //Находим путь из клеток который прошла фигура для проверки есть ли на пути другие фигуры
     if (figureOptions.firstMove) {
       if (figureOptions.color === "white") {
         // Если ход белых, разница между клетками будет положительной, если черных - отрицательной
