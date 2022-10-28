@@ -37,7 +37,6 @@ const Pawn: React.FC<Props> = ({
         if (move === figureColor) {
           e.stopPropagation();
         }
-        console.log("select");
         selectFigure("pawn", fieldInfo.position, figureColor);
       }}
     >

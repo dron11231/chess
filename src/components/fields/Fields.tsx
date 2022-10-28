@@ -18,7 +18,6 @@ const Field: React.FC<Props> = ({
   fields,
   moveFigure,
 }) => {
-  const numPosition = Number(fieldInfo.position.split("")[1]);
   const color = fieldInfo.color === "white" ? "field-white" : "field-black";
   let figure;
 
@@ -28,25 +27,18 @@ const Field: React.FC<Props> = ({
     }
   });
   useEffect(() => {
-    /* if (numPosition === 7 || numPosition === 2) {
-      console.log(numPosition); */
     setStartPosition("pawn");
-    /* } */
   }, []);
 
   return (
     <div
       onClick={() => {
-        console.log("click");
-        moveFigure(fieldInfo.position); //Нужно разобраться с кликами, тк когда происходит клик по фигуре, то и по клетке тоже
+        moveFigure(fieldInfo.position);
       }}
       className={`${classes[color]} ${classes.field}`}
     >
       <span>{fieldInfo.position}</span>
       {figure}
-      {/* {numPosition === 2 || numPosition === 7 ? (
-        <WrappedPawn fieldInfo={fieldInfo} fieldNumber={numPosition} />
-      ) : null} */}
     </div>
   );
 };
