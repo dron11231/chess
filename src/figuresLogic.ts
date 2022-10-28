@@ -67,4 +67,29 @@ export function moveHandler(
   }
   return result;
 }
-// Указания на будущее: Теперь нужно сделать логику съедания других фигур пешкой в отдельной функции
+
+export function eatHandler( //Возвращает true или false в зависимости от того можно ли съесть фигуру
+  figureOptions: IFigure,
+  targetField: IField,
+  fields: Array<IField>
+) {
+  const [fromLetter, fromNumber] = figureOptions.position.split("");
+  const [toLetter, toNumber] = targetField.position.split("");
+  if (figureOptions.figureName === "pawn") {
+    let nextFieldPosition: string;
+    if (figureOptions.color === "white") {
+      nextFieldPosition = fromLetter + (+fromNumber + 1); //находим следующее от фигуры поле по вертикали, условие нужно чтобы проверить "вниз" доски будет ход или "вверх"
+    } else {
+      nextFieldPosition = fromLetter + (+fromNumber - 1);
+    }
+    const idx = fields.findIndex((el) => el.position === nextFieldPosition);
+    const [leftField, rightField] = [fields[idx - 1], fields[idx + 1]]; //Находим следующие клетки по диагонали слева и справа от фигуры
+    if (targetField === leftField || targetField === rightField) {
+      if (targetField.figureOptions.figureName) {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+// Надо сделать ферзя для того чтобы его логику можно было использовать в других фигурах

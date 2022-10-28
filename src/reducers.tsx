@@ -3,7 +3,7 @@ import React from "react";
 import { Iaction } from "./types/ActionTypes";
 import { Istate } from "./types/ChessTypes";
 import { WrappedPawn } from "./components/figures/Figures";
-import { moveHandler } from "./figuresLogic";
+import { moveHandler, eatHandler } from "./figuresLogic";
 
 const initialState: Istate = {
   selectedFigure: {
@@ -80,16 +80,11 @@ const reducer = function (
                   targetField.figureOptions.color !== el.figureOptions.color
                 ) {
                   if (selectedFigure.figureName === "pawn") {
-                    const [fromLetter, fromNumber] =
-                      el.figureOptions.position.split("");
-                    const [toLetter, toNumber] = targetField.position.split(""); // Деструктурируем букву и цифру позиции
-                    const diff = +toNumber - +fromNumber;
-                    const allowMove = moveHandler(
-                      //Функция проверяющая можно ли делать ход
-                      el.figureOptions,
-                      targetField,
-                      fields
-                    );
+                    const allowMove =
+                      //Функции проверяющие можно ли делать ход вперёд или съесть фигуру, записывают true или false в allowMove
+                      moveHandler(el.figureOptions, targetField, fields) ||
+                      eatHandler(el.figureOptions, targetField, fields);
+
                     if (allowMove) {
                       // Если ход разрешен перемещаем фигуру и её настройки на целевое поле, на старом поле фигуру удаляем
                       targetField.figureElement = (
